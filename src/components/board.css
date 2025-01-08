@@ -107,6 +107,15 @@ form {
   font-size: 14px;
 }
 
+#birthday-list{
+  background-color: #5e5d5a;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+}
+
 input {
   padding: 15px;
   margin: 5px 0;
@@ -191,6 +200,10 @@ button:hover {
   .error-message {
     font-size: 16px;
   }
+
+  #birthday-list {
+    padding: 10px;
+  }
 }
 
 /* Medium Screens (768px to 1199px) */
@@ -226,6 +239,10 @@ button:hover {
 
   .error-message {
     font-size: 15px;
+  }
+
+  #birthday-list {
+    padding: 9px;
   }
 }
 
@@ -268,6 +285,10 @@ button:hover {
 
   .error-message {
     font-size: 14px;
+  }
+
+  #birthday-list {
+    padding: 8px;
   }
 }
 
@@ -322,5 +343,9 @@ button:hover {
   .birthday-form input,
   .birthday-form button {
     padding: 8px;
+  }
+
+  #birthday-list {
+    padding: 7px;
   }
 }

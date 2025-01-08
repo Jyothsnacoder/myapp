@@ -56,9 +56,14 @@ const BirthdayReminderApp = () => {
     setDate("");
   };
 
-  const handleDeleteBirthday = (indexToRemove) => {
-    const updatedBirthdays = birthdays.filter((_, index) => index !== indexToRemove);
-    setBirthdays(updatedBirthdays);
+  const handleDeleteBirthdayWithReminder = (index) => {
+    // Show confirmation prompt
+    const userConfirmed = window.confirm("Are you sure you want to delete this birthday?");
+
+    // If user confirms, remove the birthday from the list
+    if (userConfirmed) {
+      setBirthdays(prevBirthdays => prevBirthdays.filter((_, i) => i !== index));
+    }
   };
 
   const calculateCountdown = (date) => {
@@ -111,34 +116,34 @@ const BirthdayReminderApp = () => {
 
   return (
     <div className="container">
-    <div className="birthday-app">
-      <h1>Birthday Reminder App</h1>
-      <div className="birthday-form">
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <input
-          type="date"
-          value={date}
-          onChange={(e) => setDate(e.target.value)}
-        />
-        <button onClick={handleAddBirthday}>Add Birthday</button>
-        {error && <div className="error-message">{error}</div>}
-      </div>
-      <div id="birthday-list">
-        {birthdays.map((birthday, index) => (
-          <BirthdayItem
-            key={index}
-            name={birthday.name}
-            date={birthday.date}
-            onDelete={() => handleDeleteBirthday(index)}
+      <div className="birthday-app">
+        <h1>Birthday Reminder App</h1>
+        <div className="birthday-form">
+          <input
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
-        ))}
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />
+          <button onClick={handleAddBirthday}>Add Birthday</button>
+          {error && <div className="error-message">{error}</div>}
+        </div>
+        <div id="birthday-list">
+          {birthdays.map((birthday, index) => (
+            <BirthdayItem
+              key={index}
+              name={birthday.name}
+              date={birthday.date}
+              onDelete={() => handleDeleteBirthdayWithReminder(index)} // Updated function call
+            />
+          ))}
+        </div>
       </div>
-    </div>
     </div>
   );
 };
