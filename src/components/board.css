@@ -1,12 +1,16 @@
 body {
   font-family: Arial, sans-serif;
   background: linear-gradient(135deg, #011120, #fbf0c4);
-  color: #222;
+  color: #f3f677;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
+}
+
+.birthday-app{
+ 
 }
 
 #front_body {

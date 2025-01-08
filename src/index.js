@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from "./reportWebVitals";
 // import Main from "./mainComp"
 // import Main from "./header"
-
+// import profile from './profile'
 // import Accordion from 'react-bootstrap/Accordion';
 
 // import BasicExample from "./bs-accordian/accordianComp";
@@ -14,7 +14,7 @@ root.render(
   <React.StrictMode>
      <App />
     {/* <Main /> */}
-
+{/* <profile/> */}
     {/* <BasicExample /> */}
     {/* <Home/> */}
 {/* <Main/> */}
