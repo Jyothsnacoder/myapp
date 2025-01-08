@@ -1,13 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from "./reportWebVitals";
+// import Main from "./mainComp"
+// import Main from "./header"
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+// import Accordion from 'react-bootstrap/Accordion';
+
+// import BasicExample from "./bs-accordian/accordianComp";
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+     <App />
+    {/* <Main /> */}
+
+    {/* <BasicExample /> */}
+    {/* <Home/> */}
+{/* <Main/> */}
   </React.StrictMode>
 );
 

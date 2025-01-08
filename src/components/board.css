@@ -1,0 +1,243 @@
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #011120, #fbf0c4);
+  color: #222;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+#front_body {
+  display: none;
+}
+
+h2 {
+  color: white;
+}
+
+.container {
+  background: white;
+  background: url(../assets/images/BDAY\ image.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  padding: 2rem;
+  width: 90%;
+  margin: auto;
+  max-width: 500px;
+}
+
+.tab {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.tablink {
+  background-color: #eceeb1;
+  border: none;
+  padding: 15px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.tablink:hover {
+  background-color: #a8dadc;
+}
+
+.tablink.active {
+  background-color: #f7eeaf;
+  color: rgb(17, 2, 2);
+}
+
+.tabcontent {
+  display: none;
+  margin-top: 20px;
+}
+
+.tabcontent.active {
+  display: block;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  padding: 15px;
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: border 0.3s;
+}
+
+input:focus {
+  border-color: #9df3fb;
+  outline: none;
+}
+
+button {
+  padding: 12px 15px;
+  background-color: #f5f2a6;
+  color: rgb(15, 0, 0);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #90cdf6;
+}
+
+:root {
+  --gradient: linear-gradient(to right bottom, #1d3557, #a8dadc);
+  --dark: #1c1c1e;
+  --semi-dark: #2d2d30;
+  --light: #f4f4f9;
+  --link: #457b9d;
+}
+
+.text-loader {
+  font-size: 28px;
+  color: #210c0c;
+  font-family: 'Comic Sans MS', cursive;
+  text-align: center;
+  margin: 30px;
+  padding: 20px;
+  background: linear-gradient(45deg, #4caf50, #2a9d8f, #e63946, #a8dadc);
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  animation: pulse 1.5s infinite;
+}
+
+/* Responsive Styling */
+
+/* Large Screens (1200px and above) */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 600px;
+    padding: 3rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+  }
+
+  button {
+    font-size: 1.2rem;
+    padding: 15px 20px;
+  }
+
+  input {
+    font-size: 1.1rem;
+  }
+
+  .text-loader {
+    font-size: 32px;
+    padding: 30px;
+  }
+}
+
+/* Medium Screens (768px to 1199px) */
+@media (max-width: 1199px) and (min-width: 768px) {
+  .container {
+    max-width: 500px;
+    padding: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  button {
+    font-size: 1rem;
+    padding: 12px 15px;
+  }
+
+  input {
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  .text-loader {
+    font-size: 30px;
+    padding: 25px;
+  }
+}
+
+/* Small Screens (481px to 767px) */
+@media (max-width: 767px) and (min-width: 481px) {
+  .container {
+    width: 95%;
+    max-width: 400px;
+    padding: 2rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  button {
+    font-size: 0.95rem;
+    padding: 10px 12px;
+  }
+
+  input {
+    font-size: 0.95rem;
+    padding: 10px;
+  }
+
+  .tablink {
+    font-size: 0.95rem;
+    padding: 10px 12px;
+  }
+
+  .text-loader {
+    font-size: 28px;
+    padding: 20px;
+  }
+}
+
+/* Extra Small Screens (320px to 480px) */
+@media (max-width: 480px) {
+  body {
+    flex-direction: column;
+  }
+
+  .container {
+    width: 90%;
+    max-width: 350px;
+    padding: 1.5rem;
+    margin: auto;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+
+  button {
+    font-size: 0.85rem;
+    padding: 8px 10px;
+  }
+
+  input {
+    font-size: 0.85rem;
+    padding: 8px;
+  }
+
+  .tablink {
+    font-size: 0.85rem;
+    padding: 8px 10px;
+  }
+
+  .text-loader {
+    font-size: 25px;
+    padding: 15px;
+  }
+}
