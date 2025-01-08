@@ -112,7 +112,7 @@ const BirthdayReminderApp = () => {
   return (
     <div className="container">
     <div className="birthday-app">
-      {/* <h1>Birthday Reminder App</h1> */}
+      <h1>Birthday Reminder App</h1>
       <div className="birthday-form">
         <input
           type="text"
