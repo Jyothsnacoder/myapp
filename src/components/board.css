@@ -81,8 +81,7 @@ form {
   gap: 10px;
 }
 
-.birthday-form input,
-.birthday-form button {
+.birthday-form input {
   width: 100%;
   padding: 10px;
   margin: 5px 0;
@@ -93,6 +92,10 @@ form {
   background-color: #a58011;
   color: white;
   cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  margin: 5px 10px;
+  border-radius: 5px;
 }
 
 .birthday-form button:hover {
