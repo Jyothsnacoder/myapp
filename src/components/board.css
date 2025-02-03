@@ -112,13 +112,25 @@ form {
   font-size: 14px;
 }
 
-#birthday-list{
-  background-color: #5e5d5a;
+#birthday-list {
+  background: linear-gradient(135deg, #5e5d5a, #3e3d3a); /* Modern gradient */
   color: white;
   cursor: pointer;
   width: 100%;
-  padding: 8px;
-  border-radius: 5px;
+  padding: 12px; /* Increased padding */
+  border-radius: 8px; /* Slightly larger for smooth edges */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Adds depth */
+  font-size: 16px;
+  text-align: center;
+  opacity: 0; /* Initially hidden */
+  transform: scale(0.9); /* Slightly smaller initially */
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+/* Shows when birthdays are added */
+.show-birthday-list {
+  opacity: 1;
+  transform: scale(1);
 }
 
 input {
