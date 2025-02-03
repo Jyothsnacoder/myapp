@@ -7,7 +7,7 @@ import BirthdayReminderApp from "./components/board";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  console.log("data...")
   const handleLogin = (status) => {
     setIsLoggedIn(status);
   };
