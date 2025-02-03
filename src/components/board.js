@@ -1,55 +1,24 @@
 import React, { useState, useEffect } from "react";
 import "./board.css";
 
-// Movie fetch and display component
-const Sampes = () => {
-  const [filteredMovies, setFilteredMovies] = useState([]);
-  const url = 'https://movies-api14.p.rapidapi.com/movies';
-  const options = {
-    method: 'GET',
-    headers: {
-      'x-rapidapi-key': 'd8348a3f0dmshaff60b54df404b1p1f331fjsn26db868882b9',
-      'x-rapidapi-host': 'movies-api14.p.rapidapi.com'
-    }
-  };
-
-  useEffect(() => {
-    fetch(url, options)
-      .then((response) => response.json())
-      .then((data) => {
-        setFilteredMovies(data.json);
-      });
-  }, []);
-
-  return (
-    <div className="movie-list">
-      {filteredMovies.map((movie, index) => (
-        <div key={index} className="movie-card">
-          <img src={movie.poster_path} alt={movie.title} />
-          <h2>{movie.title}</h2>
-          <p>{movie.release_date}</p>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-// Birthday Reminder App Component
 const BirthdayReminderApp = () => {
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
   const [birthdays, setBirthdays] = useState([]);
   const [error, setError] = useState("");
 
+  // Load birthdays from local storage on initial render
   useEffect(() => {
     const savedBirthdays = JSON.parse(localStorage.getItem("birthdays")) || [];
     setBirthdays(savedBirthdays);
   }, []);
 
+  // Save birthdays to local storage whenever they change
   useEffect(() => {
     localStorage.setItem("birthdays", JSON.stringify(birthdays));
   }, [birthdays]);
 
+  // Request Notification permission on initial render
   useEffect(() => {
     if ("Notification" in window) {
       Notification.requestPermission().then((permission) => {
@@ -58,6 +27,7 @@ const BirthdayReminderApp = () => {
     }
   }, []);
 
+  // Notification for upcoming birthdays
   useEffect(() => {
     const notifyUpcomingBirthdays = () => {
       const today = new Date();
@@ -71,7 +41,7 @@ const BirthdayReminderApp = () => {
       });
     };
 
-    const interval = setInterval(notifyUpcomingBirthdays, 60000);
+    const interval = setInterval(notifyUpcomingBirthdays, 60000); // Check every 60 seconds
     return () => clearInterval(interval);
   }, [birthdays]);
 
@@ -80,14 +50,17 @@ const BirthdayReminderApp = () => {
       setError("Please enter both name and date!");
       return;
     }
-    setError("");
+    setError(""); // Clear the error
     setBirthdays([...birthdays, { name, date }]);
     setName("");
     setDate("");
   };
 
   const handleDeleteBirthdayWithReminder = (index) => {
+    // Show confirmation prompt
     const userConfirmed = window.confirm("Are you sure you want to delete this birthday?");
+
+    // If user confirms, remove the birthday from the list
     if (userConfirmed) {
       setBirthdays(prevBirthdays => prevBirthdays.filter((_, i) => i !== index));
     }
@@ -112,6 +85,13 @@ const BirthdayReminderApp = () => {
     return { days, hours, minutes, seconds };
   };
 
+  const formatCountdown = (countdown) => {
+    if (countdown.days > 0) {
+      return `${countdown.days} days`;
+    }
+    return `${countdown.hours} hours, ${countdown.minutes} minutes, ${countdown.seconds} seconds`;
+  };
+
   const BirthdayItem = ({ name, date, onDelete }) => {
     const [countdown, setCountdown] = useState(calculateCountdown(date));
 
@@ -125,13 +105,11 @@ const BirthdayReminderApp = () => {
 
     return (
       <div className="birthday-item">
-        <strong>🎉 {name} - {date}</strong>
-        <div className="countdown">
-          {countdown.days > 0
-            ? `⏳ ${countdown.days} days`
-            : `⏳ ${countdown.hours} hours, ${countdown.minutes} minutes, ${countdown.seconds} seconds`}
-        </div>
-        <button onClick={onDelete} className="delete-button">🗑️ Delete</button>
+        <strong>{name}</strong> - {date}
+        <div className="countdown">{formatCountdown(countdown)}</div>
+        <button onClick={onDelete} className="delete-button">
+          Delete
+        </button>
       </div>
     );
   };
@@ -155,18 +133,17 @@ const BirthdayReminderApp = () => {
           <button onClick={handleAddBirthday}>Add Birthday</button>
           {error && <div className="error-message">{error}</div>}
         </div>
-        <div id="birthday-list" className={birthdays.length > 0 ? "show-birthday-list" : ""}>
+        <div id="birthday-list">
           {birthdays.map((birthday, index) => (
             <BirthdayItem
               key={index}
               name={birthday.name}
               date={birthday.date}
-              onDelete={() => handleDeleteBirthdayWithReminder(index)}
+              onDelete={() => handleDeleteBirthdayWithReminder(index)} // Updated function call
             />
           ))}
         </div>
       </div>
-      <Sampes />
     </div>
   );
 };
