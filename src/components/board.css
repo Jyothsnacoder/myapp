@@ -23,7 +23,7 @@ h2 {
   font-size: 200%;
 }
 
-.container {
+/* .container {
   background: white;
   background: url(../assets/images/Free\ \ Birthday\ Card\ Background\ Image.jpg);
   background-size: cover;
@@ -34,7 +34,7 @@ h2 {
   width: 90%;
   margin: auto;
   max-width: 500px;
-}
+} */
 
 .tab {
   display: flex;
@@ -111,7 +111,6 @@ form {
   color: red;
   font-size: 14px;
 }
-
 #birthday-list {
   background: linear-gradient(135deg, #5e5d5a, #3e3d3a); /* Modern gradient */
   color: white;
@@ -132,6 +131,34 @@ form {
   opacity: 1;
   transform: scale(1);
 }
+
+/* Birthday item styling */
+.birthday-item {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Delete button */
+.delete-button {
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease-in-out;
+}
+
+.delete-button:hover {
+  background: darkred;
+}
+
 
 input {
   padding: 15px;
