@@ -1,6 +1,40 @@
 import React, { useState, useEffect } from "react";
 import "./board.css";
 
+// Movie fetch and display component
+const Sampes = () => {
+  const [filteredMovies, setFilteredMovies] = useState([]);
+  const url = 'https://movies-api14.p.rapidapi.com/movies';
+  const options = {
+    method: 'GET',
+    headers: {
+      'x-rapidapi-key': 'd8348a3f0dmshaff60b54df404b1p1f331fjsn26db868882b9',
+      'x-rapidapi-host': 'movies-api14.p.rapidapi.com'
+    }
+  };
+
+  useEffect(() => {
+    fetch(url, options)
+      .then((response) => response.json())
+      .then((data) => {
+        setFilteredMovies(data.json);
+      });
+  }, []);
+
+  return (
+    <div className="movie-list">
+      {filteredMovies.map((movie, index) => (
+        <div key={index} className="movie-card">
+          <img src={movie.poster_path} alt={movie.title} />
+          <h2>{movie.title}</h2>
+          <p>{movie.release_date}</p>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+// Birthday Reminder App Component
 const BirthdayReminderApp = () => {
   const [name, setName] = useState("");
   const [date, setDate] = useState("");
@@ -132,6 +166,7 @@ const BirthdayReminderApp = () => {
           ))}
         </div>
       </div>
+      <Sampes />
     </div>
   );
 };
