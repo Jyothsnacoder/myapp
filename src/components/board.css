@@ -99,3 +99,115 @@
 .rotate {
   transform: rotateY(360deg);
 }
+
+
+/* General container styles */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f7fa;
+}
+
+/* Birthday App Styles */
+.birthday-app {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 400px;
+  text-align: center;
+}
+
+.birthday-app h1 {
+  font-family: 'Arial', sans-serif;
+  color: #4CAF50;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Birthday Form Styles */
+.birthday-form input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.birthday-form button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.birthday-form button:hover {
+  background-color: #45a049;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* Birthday List Styles */
+#birthday-list {
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.birthday-item {
+  background-color: #fafafa;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.birthday-item strong {
+  font-size: 18px;
+  color: #333;
+}
+
+.countdown {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #777;
+}
+
+.delete-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.delete-button:hover {
+  background-color: #c0392b;
+}
+
+/* Mobile responsive styling */
+@media (max-width: 600px) {
+  .birthday-app {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .birthday-form button {
+    padding: 12px;
+    font-size: 18px;
+  }
+}
