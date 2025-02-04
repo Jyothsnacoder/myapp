@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { auth } from '../ptroutes';  // Import the auth from ptroutes.js
 import "./board.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function Signup1() {
-  const auth = getAuth();
   const navigate = useNavigate();
   const emailRef = useRef(null);
 
