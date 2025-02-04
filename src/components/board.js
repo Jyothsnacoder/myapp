@@ -6,112 +6,72 @@ const BirthdayReminderApp = () => {
   const [date, setDate] = useState("");
   const [birthdays, setBirthdays] = useState([]);
   const [error, setError] = useState("");
+  const [user, setUser] = useState(null);
 
-  // Load birthdays from local storage on initial render
+  // Load saved birthdays and check for logged-in user on initial render
   useEffect(() => {
     const savedBirthdays = JSON.parse(localStorage.getItem("birthdays")) || [];
     setBirthdays(savedBirthdays);
-  }, []);
 
-  // Save birthdays to local storage whenever they change
-  useEffect(() => {
-    localStorage.setItem("birthdays", JSON.stringify(birthdays));
-  }, [birthdays]);
-
-  // Request Notification permission on initial render
-  useEffect(() => {
-    if ("Notification" in window) {
-      Notification.requestPermission().then((permission) => {
-        console.log("Notification permission:", permission);
-      });
+    // Get the user from local storage
+    const currentUser = JSON.parse(localStorage.getItem("user"));
+    if (!currentUser) {
+      window.location.href = "/"; // Redirect to login if not logged in
+    } else {
+      setUser(currentUser);
     }
   }, []);
 
-  // Notification for upcoming birthdays
-  useEffect(() => {
-    const notifyUpcomingBirthdays = () => {
-      const today = new Date();
-      birthdays.forEach(({ name, date }) => {
-        const countdown = calculateCountdown(date);
-        if (countdown.days === 0 && countdown.hours === 0 && countdown.minutes <= 1) {
-          if ("Notification" in window && Notification.permission === "granted") {
-            new Notification(`🎉 Reminder: It's ${name}'s birthday in less than 1 minute! 🎂`);
-          }
-        }
-      });
-    };
-
-    const interval = setInterval(notifyUpcomingBirthdays, 60000); // Check every 60 seconds
-    return () => clearInterval(interval);
-  }, [birthdays]);
-
+  // Handle adding a birthday
   const handleAddBirthday = () => {
     if (!name || !date) {
       setError("Please enter both name and date!");
       return;
     }
     setError(""); // Clear the error
-    setBirthdays([...birthdays, { name, date }]);
+    const newBirthday = { name, date };
+    setBirthdays([...birthdays, newBirthday]);
+
+    // Save the updated birthdays to local storage
+    localStorage.setItem("birthdays", JSON.stringify([...birthdays, newBirthday]));
+
     setName("");
     setDate("");
   };
 
+  // Handle deleting a birthday
   const handleDeleteBirthdayWithReminder = (index) => {
-    // Show confirmation prompt
-    const userConfirmed = window.confirm("Are you sure you want to delete this birthday?");
+    const updatedBirthdays = birthdays.filter((_, i) => i !== index);
+    setBirthdays(updatedBirthdays);
 
-    // If user confirms, remove the birthday from the list
-    if (userConfirmed) {
-      setBirthdays(prevBirthdays => prevBirthdays.filter((_, i) => i !== index));
-    }
+    // Update local storage
+    localStorage.setItem("birthdays", JSON.stringify(updatedBirthdays));
   };
 
-  const calculateCountdown = (date) => {
+  // Calculate countdown to the next birthday
+  const calculateCountdown = (birthdayDate) => {
     const today = new Date();
-    const birthdayDate = new Date(date);
     const nextBirthday = new Date(birthdayDate);
     nextBirthday.setFullYear(today.getFullYear());
-
+    
     if (nextBirthday < today) {
-      nextBirthday.setFullYear(today.getFullYear() + 1);
+      nextBirthday.setFullYear(today.getFullYear() + 1); // Next year
     }
 
-    const timeDiff = nextBirthday.getTime() - today.getTime();
+    const timeDiff = nextBirthday - today;
     const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
-    return { days, hours, minutes, seconds };
+    return { days, hours, minutes };
   };
 
+  // Format countdown display
   const formatCountdown = (countdown) => {
     if (countdown.days > 0) {
       return `${countdown.days} days`;
     }
-    return `${countdown.hours} hours, ${countdown.minutes} minutes, ${countdown.seconds} seconds`;
-  };
-
-  const BirthdayItem = ({ name, date, onDelete }) => {
-    const [countdown, setCountdown] = useState(calculateCountdown(date));
-
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setCountdown(calculateCountdown(date));
-      }, 1000);
-
-      return () => clearInterval(interval);
-    }, [date]);
-
-    return (
-      <div className="birthday-item">
-        <strong>{name}</strong> - {date}
-        <div className="countdown">{formatCountdown(countdown)}</div>
-        <button onClick={onDelete} className="delete-button">
-          Delete
-        </button>
-      </div>
-    );
+    return `${countdown.hours} hours, ${countdown.minutes} minutes`;
   };
 
   return (
@@ -134,14 +94,21 @@ const BirthdayReminderApp = () => {
           {error && <div className="error-message">{error}</div>}
         </div>
         <div id="birthday-list">
-          {birthdays.map((birthday, index) => (
-            <BirthdayItem
-              key={index}
-              name={birthday.name}
-              date={birthday.date}
-              onDelete={() => handleDeleteBirthdayWithReminder(index)} // Updated function call
-            />
-          ))}
+          {birthdays.map((birthday, index) => {
+            const countdown = calculateCountdown(birthday.date);
+            return (
+              <div key={index} className="birthday-item">
+                <strong>{birthday.name}</strong> - {birthday.date}
+                <div className="countdown">{formatCountdown(countdown)}</div>
+                <button
+                  onClick={() => handleDeleteBirthdayWithReminder(index)}
+                  className="delete-button"
+                >
+                  Delete
+                </button>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

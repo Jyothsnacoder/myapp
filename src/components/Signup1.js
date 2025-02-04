@@ -1,16 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { app } from "../../fbconfig";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-} from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import "./signup.css";
+import "./board.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function Signup1() {
-  const auth = getAuth(app);
+  const auth = getAuth();
   const navigate = useNavigate();
   const emailRef = useRef(null);
 
@@ -34,7 +29,7 @@ function Signup1() {
 
   const validatePassword = (password) => {
     const pattern =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%?&])[A-Za-z\d@$!%?&]{8,}$/;
     return pattern.test(password);
   };
 
@@ -56,9 +51,7 @@ function Signup1() {
     }
 
     if (isSignup && !validatePassword(password)) {
-      setError(
-        "Password must have 8+ characters, 1 uppercase, 1 lowercase, 1 number, and 1 special character."
-      );
+      setError("Password must have 8+ characters, 1 uppercase, 1 lowercase, 1 number, and 1 special character.");
       setLoading(false);
       return;
     }
@@ -66,55 +59,59 @@ function Signup1() {
     try {
       if (isSignup) {
         await createUserWithEmailAndPassword(auth, email, password);
-        setIsSignup(false);
+        setIsSignup(false); // Switch to Login form
         setEmail("");
         setPassword("");
         setConfirmPassword("");
       } else {
         await signInWithEmailAndPassword(auth, email, password);
-        navigate("/dashboard");
+        navigate("/birthday");  // Navigate to the BirthdayReminderApp
       }
     } catch (err) {
       console.error(err);
-      const errorMessages = {
-        "auth/invalid-credential": "Invalid credentials provided/password incorrect.",
-        "auth/user-not-found": "No account found with this email.",
-        "auth/wrong-password": "Incorrect password. Please try again.",
-        "auth/email-already-in-use": "This email is already registered. Please log in or use a different email.",
-      };
-      setError(errorMessages[err.code] || "An error occurred. Please try again.");
+      if (err.code === "auth/invalid-credential") {
+        setError("Invalid credentials provided/password incorrect.");
+      } else if (err.code === "auth/user-not-found") {
+        setError("No account found with this email.");
+      } else if (err.code === "auth/wrong-password") {
+        setError("Incorrect password. Please try again.");
+      } else if (err.code === "auth/email-already-in-use") {
+        setError("This email is already registered. Please log in or use a different email.");
+      } else {
+        setError("An error occurred. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
   };
 
   const handleGuestLogin = () => {
-    navigate("/dashboard");
+    navigate("/birthday"); // Navigate to BirthdayReminderApp for guest
   };
 
   const handleToggle = () => {
     setRotate(!rotate);
-    setIsSignup(!isSignup);
+    setIsSignup(!isSignup); // Switch between signup and login
   };
 
   return (
     <div className="auth-container">
       <div className={`auth-form ${rotate ? "rotate" : ""}`}>
-        <h1>{isSignup ? "Signup" : "Login"}</h1>
-        <form onSubmit={handleSubmit} className="auth-form">
+        <h1 style={{ fontSize: "2rem", fontFamily: "Roboto" }}>
+          {isSignup ? "Signup" : "Login"}
+        </h1>
+        <form onSubmit={handleSubmit} className="auth-form" style={{ fontSize: "1rem", fontFamily: "Roboto" }}>
           {error && <p className="error-message">{error}</p>}
-
           <input
             ref={emailRef}
             type="email"
             placeholder="Enter email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="auth-input"
+            className="auths-input"
             required
           />
-
-          <div className="password-container">
+          <div className="password-container" style={{ fontSize: "1rem", fontFamily: "Roboto" }}>
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Enter password"
@@ -127,9 +124,8 @@ function Signup1() {
               {showPassword ? <FaEyeSlash /> : <FaEye />}
             </span>
           </div>
-
           {isSignup && (
-            <div className="password-container">
+            <div className="password-container" style={{ fontSize: "1rem", fontFamily: "Roboto" }}>
               <input
                 type={showConfirmPassword ? "text" : "password"}
                 placeholder="Confirm password"
@@ -143,17 +139,14 @@ function Signup1() {
               </span>
             </div>
           )}
-
           <button type="submit" className="auth-button" disabled={loading}>
             {loading ? "Processing..." : isSignup ? "Signup" : "Login"}
           </button>
         </form>
-
-        <button onClick={handleGuestLogin} className="guest-button">
+        <button onClick={handleGuestLogin} className="guest-button" style={{ fontSize: "1rem", fontFamily: "Roboto" }}>
           Guest Login
         </button>
-
-        <p onClick={handleToggle} className="toggle-auth">
+        <p onClick={handleToggle} className="toggle-auth" style={{ fontSize: "1rem", fontFamily: "Roboto" }}>
           {isSignup ? "Already have an account? Login" : "Don't have an account? Signup"}
         </p>
       </div>

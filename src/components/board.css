@@ -1,395 +1,101 @@
-body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #c9f6f7, #fee581);
-  color: #f3f677;
+/* Signup.css */
+.auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin: 0;
+  background: linear-gradient(135deg, #667eea, #764ba2);
 }
 
-.birthday-app > h1 {
-  color: #210c0c;
-  text-align: center;
-}
-
-#front_body {
-  display: none;
-}
-
-h2 {
-  color: rgb(15, 12, 12);
-  font-size: 200%;
-}
-
-/* .container {
+.auth-form {
   background: white;
-  background: url(../assets/images/Free\ \ Birthday\ Card\ Background\ Image.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   padding: 2rem;
-  width: 90%;
-  margin: auto;
-  max-width: 500px;
-} */
-
-.tab {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 350px;
+  transition: transform 0.5s ease-in-out;
 }
 
-.tablink {
-  background-color: #ef9931;
-  border: none;
-  padding: 15px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s;
+.auth-form h1 {
+  font-size: 24px;
+  margin-bottom: 1rem;
+  color: #333;
 }
 
-.tablink:hover {
-  background-color: #a8dadc;
-}
-
-.tablink.active {
-  color: rgb(17, 2, 2);
-}
-
-.tabcontent {
-  display: none;
-  margin-top: 20px;
-}
-
-.tabcontent.active {
-  display: block;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.birthday-form {
-  padding: 15px;
-  margin: 5px 0;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.birthday-form input {
+.auth-input {
   width: 100%;
   padding: 10px;
-  margin: 5px 0;
+  margin: 8px 0;
+  border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 16px;
 }
 
-.birthday-form button {
-  background-color: #a58011;
-  /* color: white;
+.password-container {
+  position: relative;
+  width: 100%;
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.password-container span {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   cursor: pointer;
-  width: 106%;
-  padding: 10px;
-  margin: -4px ;
-  border-radius: 5px; */
-  width: 107%;
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 5px;
+  color: #666;
 }
 
-.birthday-form button:hover {
-  background-color: #45a049;
+.auth-button, .guest-button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.auth-button {
+  background: #667eea;
+  color: white;
+}
+
+.auth-button:hover {
+  background: #5563c1;
+}
+
+.guest-button {
+  background: #28a745;
+  color: white;
+}
+
+.guest-button:hover {
+  background: #218838;
+}
+
+.toggle-auth {
+  margin-top: 10px;
+  color: #667eea;
+  cursor: pointer;
+}
+
+.toggle-auth:hover {
+  text-decoration: underline;
 }
 
 .error-message {
   color: red;
   font-size: 14px;
-}
-#birthday-list {
-  background: linear-gradient(135deg, #5e5d5a, #3e3d3a); /* Modern gradient */
-  color: white;
-  cursor: pointer;
-  width: 100%;
-  padding: 12px; /* Increased padding */
-  border-radius: 8px; /* Slightly larger for smooth edges */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Adds depth */
-  font-size: 16px;
-  text-align: center;
-  opacity: 0; /* Initially hidden */
-  transform: scale(0.9); /* Slightly smaller initially */
-  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+  margin-bottom: 10px;
 }
 
-/* Shows when birthdays are added */
-.show-birthday-list {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Birthday item styling */
-.birthday-item {
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 10px;
-  margin: 8px 0;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: all 0.3s ease-in-out;
-}
-
-/* Delete button */
-.delete-button {
-  background: red;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background 0.3s ease-in-out;
-}
-
-.delete-button:hover {
-  background: darkred;
-}
-
-
-input {
-  padding: 15px;
-  margin: 5px 0;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  transition: border 0.3s;
-  background-color: #fcf5e6;
-}
-
-input:focus {
-  border-color: #9df3fb;
-  outline: none;
-}
-
-button {
-  padding: 12px 15px;
-  background-color: #ef9931;
-  color: rgb(15, 0, 0);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #90cdf6;
-}
-
-:root {
-  --gradient: linear-gradient(to right bottom, #1d3557, #a8dadc);
-  --dark: #1c1c1e;
-  --semi-dark: #2d2d30;
-  --light: #f4f4f9;
-  --link: #457b9d;
-}
-
-.text-loader {
-  font-size: 28px;
-  color: #210c0c;
-  font-family: 'Comic Sans MS', cursive;
-  text-align: center;
-  margin: 30px;
-  padding: 20px;
-  background: linear-gradient(45deg, #4caf50, #2a9d8f, #e63946, #a8dadc);
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  animation: pulse 1.5s infinite;
-}
-
-/* Responsive Styling */
-
-/* Large Screens (1200px and above) */
-@media (min-width: 1200px) {
-  .container {
-    max-width: 600px;
-    padding: 3rem;
-  }
-
-  h2 {
-    font-size: 2.5rem;
-  }
-
-  button {
-    font-size: 1.2rem;
-    padding: 15px 20px;
-  }
-
-  input {
-    font-size: 1.1rem;
-  }
-
-  .text-loader {
-    font-size: 32px;
-    padding: 30px;
-  }
-
-  .birthday-form input,
-  .birthday-form button {
-    padding: 12px;
-  }
-
-  .error-message {
-    font-size: 16px;
-  }
-
-  #birthday-list {
-    padding: 10px;
-  }
-}
-
-/* Medium Screens (768px to 1199px) */
-@media (max-width: 1199px) and (min-width: 768px) {
-  .container {
-    max-width: 500px;
-    padding: 2.5rem;
-  }
-
-  h2 {
-    font-size: 2rem;
-  }
-
-  button {
-    font-size: 1rem;
-    padding: 12px 15px;
-  }
-
-  input {
-    font-size: 1rem;
-    padding: 12px;
-  }
-
-  .text-loader {
-    font-size: 30px;
-    padding: 25px;
-  }
-
-  .birthday-form input,
-  .birthday-form button {
-    padding: 10px;
-  }
-
-  .error-message {
-    font-size: 15px;
-  }
-
-  #birthday-list {
-    padding: 9px;
-  }
-}
-
-/* Small Screens (481px to 767px) */
-@media (max-width: 767px) and (min-width: 481px) {
-  .container {
-    width: 95%;
-    max-width: 400px;
-    padding: 2rem;
-  }
-
-  h2 {
-    font-size: 1.8rem;
-  }
-
-  button {
-    font-size: 0.95rem;
-    padding: 10px 12px;
-  }
-
-  input {
-    font-size: 0.95rem;
-    padding: 10px;
-  }
-
-  .tablink {
-    font-size: 0.95rem;
-    padding: 10px 12px;
-  }
-
-  .text-loader {
-    font-size: 28px;
-    padding: 20px;
-  }
-
-  .birthday-form input,
-  .birthday-form button {
-    padding: 10px;
-  }
-
-  .error-message {
-    font-size: 14px;
-  }
-
-  #birthday-list {
-    padding: 8px;
-  }
-}
-
-/* Extra Small Screens (320px to 480px) */
-@media (max-width: 480px) {
-  body {
-    flex-direction: column;
-  }
-
-  .container {
-    width: 90%;
-    max-width: 350px;
-    padding: 1.5rem;
-    margin: auto;
-  }
-
-  h2 {
-    font-size: 1.6rem;
-  }
-
-  button {
-    font-size: 0.85rem;
-    padding: 8px 10px;
-  }
-
-  input {
-    font-size: 0.85rem;
-    padding: 8px;
-  }
-
-  .tablink {
-    font-size: 0.85rem;
-    padding: 8px 10px;
-  }
-
-  .text-loader {
-    font-size: 25px;
-    padding: 15px;
-  }
-
-  .birthday-app > h1 {
-    margin-top: 10%;
-    text-align: center;
-    font-size: 1.8rem;
-    color: hotpink;
-  }
-
-  .error-message {
-    font-size: 12px;
-  }
-
-  .birthday-form input,
-  .birthday-form button {
-    padding: 8px;
-  }
-
-  #birthday-list {
-    padding: 7px;
-  }
+.rotate {
+  transform: rotateY(360deg);
 }
